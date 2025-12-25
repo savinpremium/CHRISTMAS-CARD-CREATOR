@@ -13,7 +13,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at center, #0a0a0a, #020202);
+      background: radial-gradient(circle at top, #1a2e1a, #050505);
       color: white;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
@@ -39,27 +39,42 @@
       100% { transform: translateY(110vh) translateX(0) rotate(360deg); }
     }
 
+    .twinkle {
+      animation: twinkle 2s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
     .card-shadow {
-      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 0 50px rgba(220, 38, 38, 0.15);
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8), 0 0 80px rgba(220, 38, 38, 0.2);
     }
 
     .glass {
-      background: rgba(18, 18, 20, 0.7);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 20, 10, 0.7);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .glass-button {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .glass-button:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(220, 38, 38, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(220, 38, 38, 0.3);
+    }
+
+    .festive-pattern {
+      background-image: radial-gradient(#ffffff11 1px, transparent 1px);
+      background-size: 20px 20px;
     }
 
     @media print {
@@ -77,10 +92,10 @@
       .no-print { display: none !important; }
     }
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #444; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #1a3a1a; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #dc2626; }
   </style>
 <script type="importmap">
 {
@@ -94,7 +109,7 @@
 }
 </script>
 </head>
-<body>
+<body class="festive-pattern">
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

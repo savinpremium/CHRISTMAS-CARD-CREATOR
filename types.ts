@@ -1,7 +1,7 @@
 
 export type CardTone = 'Heartfelt' | 'Funny' | 'Professional' | 'Poetic' | 'Short & Sweet';
 
-export type CardFrameStyle = 'Classic' | 'Candy Cane' | 'Winter Frost' | 'Minimalist';
+export type CardFrameStyle = 'Classic' | 'Candy Cane' | 'Winter Frost' | 'Forest Pine' | 'Midnight Sleigh' | 'Santa’s Workshop';
 
 export interface CardState {
   recipient: string;

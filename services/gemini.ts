@@ -10,7 +10,7 @@ export const generateWishAI = async (recipient: string, sender: string, tone: Ca
     The tone should be ${tone}. 
     CRITICAL: Do not use any markdown formatting like asterisks (*), hashtags (#), or bolding. 
     Just plain elegant text. 
-    Make it feel deeply personal and magical.`;
+    Incorporate warm festive imagery like sleigh bells, North Pole magic, or Santa's journey if appropriate for the tone.`;
 
   try {
     const response = await ai.models.generateContent({
@@ -33,15 +33,15 @@ export const generateCardImageAI = async (tone: CardTone): Promise<string> => {
   const ai = getAI();
   
   const stylePromptMap: Record<CardTone, string> = {
-    'Heartfelt': 'A high-definition, cozy Christmas masterpiece. An elegant oil painting of a warm, glowing fireplace with red stockings, a decorated Christmas tree nearby with golden lights, soft atmospheric lighting, nostalgic holiday spirit, extremely detailed, 4k.',
-    'Funny': 'A whimsical and vibrant 3D animation style illustration of a funny, adorable reindeer wearing an oversized Christmas sweater and getting tangled in glowing colorful fairy lights, snowy background, Pixar-like quality, bright and cheerful.',
-    'Professional': 'A sophisticated and modern digital art piece. A minimalist, stylized Christmas tree formed from shimmering gold geometric lines on a deep luxury navy blue background, sharp focus, high-end corporate holiday card style, elegant and clean.',
-    'Poetic': 'A breathtaking winter wonderland scene at night. A dreamy watercolor painting of a snow-covered forest under a giant glowing full moon, ethereal sparkles like diamond dust in the air, deep blues and silver highlights, magical and serene.',
-    'Short & Sweet': 'A delightful and crisp illustration of a happy gingerbread man and a cute snowman sharing a candy cane, soft pastel winter colors, simple yet charming festive design, high quality vector-style art.'
+    'Heartfelt': 'A high-definition masterpiece of Santa Claus quietly placing gifts under a glowing Christmas tree in a cozy living room with a fireplace, warm golden lighting, nostalgia, 8k resolution, cinematic.',
+    'Funny': 'A humorous 3D Pixar-style scene of Santa Claus accidentally getting stuck in a chimney with reindeer laughing nearby, bright colors, expressive faces, snowy roof background.',
+    'Professional': 'A minimalist and luxury illustration of a golden sleigh flying across a moonlit sky over a silhouette of a pine forest, elegant gold foil texture, deep navy blue background, high-end art.',
+    'Poetic': 'A dreamy, ethereal winter scene. An ice-sculpture of a reindeer in a magical forest under the Aurora Borealis, glowing sparkles, soft watercolor textures, enchanting and serene.',
+    'Short & Sweet': 'A cute and charming illustration of Santa’s hat resting on a pile of beautifully wrapped gifts, soft festive colors, clean vector art, heartwarming holiday design.'
   };
 
-  const basePrompt = stylePromptMap[tone] || 'A beautiful high-quality Christmas scene with festive decorations and snow.';
-  const finalPrompt = `${basePrompt} NO ROADS, NO CARS, ONLY FESTIVE CHRISTMAS ELEMENTS.`;
+  const basePrompt = stylePromptMap[tone] || 'A beautiful high-quality Christmas scene with Santa and festive decorations.';
+  const finalPrompt = `${basePrompt} NO ROADS, NO CARS. EXTREME CHRISTMAS VIBES, SNOW, MAGIC.`;
 
   try {
     const response = await ai.models.generateContent({
@@ -51,7 +51,7 @@ export const generateCardImageAI = async (tone: CardTone): Promise<string> => {
       },
       config: {
         imageConfig: {
-          aspectRatio: "1:1"
+          aspectRatio: "9:16"
         }
       }
     });
@@ -65,7 +65,6 @@ export const generateCardImageAI = async (tone: CardTone): Promise<string> => {
     throw new Error("No image data in response");
   } catch (error) {
     console.error("Error generating image:", error);
-    // Use specific high-quality Unsplash IDs for fallbacks instead of random picsum
     const fallbacks: Record<string, string> = {
       'Heartfelt': 'https://images.unsplash.com/photo-1543589077-47d816067ce1?q=80&w=1000&auto=format&fit=crop',
       'Funny': 'https://images.unsplash.com/photo-1512433990356-47065c86f7e3?q=80&w=1000&auto=format&fit=crop',
