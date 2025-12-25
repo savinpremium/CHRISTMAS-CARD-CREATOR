@@ -139,17 +139,35 @@ const App: React.FC = () => {
     if (cardRef.current) {
       setState(prev => ({ ...prev, isExporting: true }));
       try {
-        const options = { pixelRatio: 3, backgroundColor: '#ffffff' };
+        // html-to-image options to help avoid the 'Cannot access rules' error
+        // skipFonts: false allows font embedding, but ensure crossorigin is set in index.html
+        const options = { 
+          pixelRatio: 2, // 3 can sometimes exceed memory limits on mobile
+          backgroundColor: '#ffffff',
+          cacheBust: true,
+          style: {
+            transform: 'scale(1)',
+          },
+          // Filter out problematic elements that might cause CSS rule access issues
+          filter: (node: HTMLElement) => {
+            if (node.tagName === 'SCRIPT' || node.classList?.contains('no-print')) {
+              return false;
+            }
+            return true;
+          }
+        };
+
         const dataUrl = format === 'png' 
           ? await htmlToImage.toPng(cardRef.current, options)
           : await htmlToImage.toJpeg(cardRef.current, options);
           
         const link = document.createElement('a');
-        link.download = `Santa-Poster-${state.recipient.replace(/\s+/g, '-')}.${format}`;
+        link.download = `Santa-Poster-${state.recipient.trim().replace(/\s+/g, '-')}.${format}`;
         link.href = dataUrl;
         link.click();
-      } catch (err) {
-        console.error('Error downloading card', err);
+      } catch (err: any) {
+        console.error('Download error:', err);
+        alert('Magic error! Could not export the poster. Please try again or take a screenshot.');
       } finally {
         setState(prev => ({ ...prev, isExporting: false }));
       }
