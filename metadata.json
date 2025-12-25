@@ -1,0 +1,7 @@
+{
+  "name": "Christmas Card Creator",
+  "description": "A high-end, AI-powered Christmas card generator featuring Gemini-driven text and image creation with elegant festive animations.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
